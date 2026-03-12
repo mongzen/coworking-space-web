@@ -12,6 +12,8 @@
     "generate:types": "payload generate:types"
   },
   "dependencies": {
+    "@fontsource/inter": "^5.2.8",
+    "@fontsource/playfair-display": "^5.2.8",
     "@payloadcms/db-mongodb": "^3.79.0",
     "@payloadcms/db-sqlite": "^3.26.0",
     "@payloadcms/next": "^3.26.0",
@@ -20,7 +22,8 @@
     "next": "^15.1.0",
     "payload": "^3.26.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-intersection-observer": "^10.0.3"
   },
   "devDependencies": {
     "@types/node": "^22.10.2",

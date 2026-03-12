@@ -1,13 +1,21 @@
+/* @import '@fontsource/inter/variable.css';
+@import '@fontsource/playfair-display/variable.css'; */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  color-scheme: light;
-}
+
 
 body {
-  @apply bg-bone text-charcoal antialiased;
+  @apply bg-bone text-charcoal font-sans antialiased;
+  scroll-behavior: smooth;
+}
+
+
+
+:root {
+  color-scheme: light;
 }
 
 .section-title {

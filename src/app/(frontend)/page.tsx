@@ -1,6 +1,13 @@
 import config from '@payload-config'
 import { getPayload } from 'payload'
 import { HomepageClient } from '@/components/HomepageClient'
+import HeroSection from '../../components/HeroSection'
+import FeatureMetrics from '../../components/FeatureMetrics'
+import CommunitySection from '../../components/CommunitySection'
+import WorkspaceSection from '../../components/WorkspaceSection'
+import MembershipSection from '../../components/MembershipSection'
+import Navbar from '../../components/Navbar'
+import Footer from '../../components/Footer'
 
 const fallbackData = {
   heroTitle: 'Your Future Office',
@@ -44,15 +51,17 @@ export default async function HomePage() {
     )
   } catch {
     return (
-      <HomepageClient
-        heroTitle={fallbackData.heroTitle}
-        heroDescription={fallbackData.heroDescription}
-        stats={fallbackData.stats}
-        featuredImages={fallbackData.featuredImages}
-        ctaTitle={fallbackData.cta.title}
-        ctaDescription={fallbackData.cta.description}
-        ctaButtonLabel={fallbackData.cta.buttonLabel}
-      />
+      <>
+        <Navbar />
+        <main>
+          <HeroSection />
+          <FeatureMetrics />
+          <CommunitySection />
+          <WorkspaceSection />
+          <MembershipSection />
+        </main>
+        <Footer />
+      </>
     )
   }
 }
