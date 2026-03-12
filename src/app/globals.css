@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  @apply bg-bone text-charcoal antialiased;
+}
+
+.section-title {
+  @apply text-4xl leading-tight md:text-6xl;
+  font-family: "Times New Roman", serif;
+}
