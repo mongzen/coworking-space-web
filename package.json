@@ -12,6 +12,7 @@
     "generate:types": "payload generate:types"
   },
   "dependencies": {
+    "@payloadcms/db-mongodb": "^3.79.0",
     "@payloadcms/db-sqlite": "^3.26.0",
     "@payloadcms/next": "^3.26.0",
     "framer-motion": "^11.11.17",

@@ -1,6 +1,6 @@
 import path from 'node:path'
 import { buildConfig } from 'payload'
-import { sqliteAdapter } from '@payloadcms/db-sqlite'
+import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { Memberships } from './collections/Memberships'
 import { Spaces } from './collections/Spaces'
 import { Homepage } from './globals/Homepage'
@@ -23,10 +23,8 @@ export default buildConfig({
   ],
   globals: [Homepage],
   secret: process.env.PAYLOAD_SECRET || 'dev-secret',
-  db: sqliteAdapter({
-    client: {
-      url: process.env.DATABASE_URI || 'file:./payload.db'
-    }
+  db: mongooseAdapter({
+    url: process.env.DATABASE_URL || 'mongodb://localhost:27017/coworking',
   }),
   typescript: {
     outputFile: path.resolve(process.cwd(), 'src/payload-types.ts')
