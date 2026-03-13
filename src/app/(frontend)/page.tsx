@@ -5,6 +5,9 @@ import HeroSection from '../../components/HeroSection'
 import FeatureMetrics from '../../components/FeatureMetrics'
 import CommunitySection from '../../components/CommunitySection'
 import WorkspaceSection from '../../components/WorkspaceSection'
+import BenefitsSection from '../../components/BenefitsSection'
+import GallerySection from '../../components/GallerySection'
+import CTASection from '../../components/CTASection'
 import MembershipSection from '../../components/MembershipSection'
 import Navbar from '../../components/Navbar'
 import Footer from '../../components/Footer'
@@ -58,6 +61,9 @@ export default async function HomePage() {
           <FeatureMetrics />
           <CommunitySection />
           <WorkspaceSection />
+          <BenefitsSection />
+          <GallerySection />
+          <CTASection />
           <MembershipSection />
         </main>
         <Footer />

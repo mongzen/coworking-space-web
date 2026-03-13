@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
 import config from '@payload-config'
 import { RootPage, generatePageMetadata } from '@payloadcms/next/views'
 

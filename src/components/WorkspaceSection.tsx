@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 const spaces = [
   {
@@ -47,10 +48,12 @@ export default function WorkspaceSection() {
               viewport={{ once: true }}
               className="rounded-xl overflow-hidden shadow-lg bg-white flex flex-col"
             >
-              <img
+              <Image
                 src={space.img}
                 alt={space.title}
                 className="h-48 w-full object-cover"
+                width={400}
+                height={300}
               />
               <div className="p-4 flex-1 flex items-center justify-center">
                 <span className="font-medium text-center text-lg md:text-xl text-charcoal">

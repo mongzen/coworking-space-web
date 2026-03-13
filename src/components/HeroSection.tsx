@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 export default function HeroSection() {
   return (
@@ -31,10 +32,12 @@ export default function HeroSection() {
         viewport={{ once: true }}
         className="flex-1 flex flex-col gap-4 items-center justify-center px-6 md:px-0"
       >
-        <img
+        <Image
           src="/hero-office.jpg"
           alt="Coworking Space Hero"
           className="rounded-xl shadow-lg w-full max-w-md object-cover"
+          width={500}
+          height={500}
         />
       </motion.div>
     </section>

@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Image from 'next/image';
 
 type Stat = { label: string; value: string }
 type FeatureImage = { imageURL: string }
@@ -40,11 +41,13 @@ export function HomepageClient(props: HomepageClientProps) {
         >
           {props.featuredImages.slice(0, 4).map((image, idx) => (
             <div key={`${image.imageURL}-${idx}`} className="overflow-hidden rounded-xl">
-              <img
+              <Image
                 className="h-48 w-full object-cover transition duration-700 hover:scale-105 md:h-56"
                 src={image.imageURL}
                 alt="Coworking environment"
                 loading={idx > 0 ? 'lazy' : 'eager'}
+                width={400}
+                height={300}
               />
             </div>
           ))}
