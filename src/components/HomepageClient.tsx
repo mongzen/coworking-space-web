@@ -158,6 +158,60 @@ function StarBurst() {
   );
 }
 
+function CommunityCardIcon({ type }: { type: "cube" | "badge" | "blocks" }) {
+  if (type === "cube") {
+    return (
+      <svg viewBox="0 0 51 51" className="h-full w-full" aria-hidden="true">
+        <path
+          d="M25.5 3.2 7 13.8v23.5L25.5 47.8 44 37.3V13.8L25.5 3.2Zm0 4 14.9 8.5-14.9 8.6-14.9-8.6L25.5 7.2Zm-16 12.1 14.5 8.4v16.8L9.5 36.1V19.3Zm31.9 0v16.8l-14.5 8.4V27.7l14.5-8.4Z"
+          fill="currentColor"
+        />
+      </svg>
+    );
+  }
+
+  if (type === "badge") {
+    return (
+      <svg viewBox="0 0 51 51" className="h-full w-full" aria-hidden="true">
+        <path
+          d="M25.5 3.8 31 11l8.9 2.8-5.4 7v8.9l-9-2.8-9 2.8v-8.9l-5.4-7L20 11l5.5-7.2Zm-6 24.9h4.4V47h-4.4V28.7Zm8.1 0H32V47h-4.4V28.7Z"
+          fill="currentColor"
+        />
+      </svg>
+    );
+  }
+
+  return (
+    <svg viewBox="0 0 51 51" className="h-full w-full" aria-hidden="true">
+      <path
+        d="M8 9h16v16H8V9Zm19 0h16v16H27V9ZM8 28h16v16H8V28Zm19 0h16v16H27V28Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
+
+const communityCards = [
+  {
+    title: "100 + Renowned\nCompanies",
+    description:
+      "Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit, Sed Do Eiusmod Tempor Incididunt Ut Labore.",
+    icon: "cube" as const,
+  },
+  {
+    title: "3 Building’s Available\nFor Co.",
+    description:
+      "Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit, Sed Do Eiusmod Tempor Incididunt Ut Labore.",
+    icon: "badge" as const,
+  },
+  {
+    title: "10 + Communities\nConnected",
+    description:
+      "Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit, Sed Do Eiusmod Tempor Incididunt Ut Labore.",
+    icon: "blocks" as const,
+  },
+];
+
 export function HomepageClient(props: HomepageClientProps) {
   const [startCounter, setStartCounter] = useState(false);
 
@@ -287,6 +341,57 @@ export function HomepageClient(props: HomepageClientProps) {
             </button>
           </div>
         </aside>
+      </section>
+
+      <section className="relative overflow-hidden bg-black text-white">
+        <div className="mx-auto w-full border-x border-white/30 lg:max-w-[calc(100vw*1728/1728)]">
+          <div className="grid min-h-[calc(100vw*786/1728)] grid-cols-1 border-white/30 lg:grid-cols-[calc(100vw*318/1728)_1fr]">
+            <div className="relative hidden border-r border-white/30 lg:block">
+              <div className="mx-auto mt-[calc(100vw*154/1728)] flex h-[calc(100vw*110/1728)] w-[calc(100vw*110/1728)] items-center justify-center rounded-full border border-white/40">
+                <div className="h-[calc(100vw*44/1728)] w-[calc(100vw*44/1728)] rounded-full border border-white/30 bg-white/10" />
+              </div>
+
+              <div className="absolute -right-[calc(100vw*193/1728)] bottom-[calc(100vw*35/1728)] flex h-[calc(100vw*386/1728)] w-[calc(100vw*386/1728)] items-center justify-center rounded-full border-[1.5px] border-white/90 px-[calc(100vw*48/1728)] text-center font-lato text-[calc(100vw*32/1728)] font-bold leading-[1.54] text-white/90">
+                Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit, Sed Do
+                Eiusmod Tempor Incididunt Ut Labore Et Dolore Magna Aliqua.
+              </div>
+            </div>
+
+            <div className="px-6 py-16 md:px-10 lg:px-[calc(100vw*110/1728)] lg:py-[calc(100vw*96/1728)]">
+              <h2 className="text-center font-italiana text-[52px] leading-[1.17] md:text-[84px] lg:text-[calc(100vw*120/1728)]">
+                A Community
+                <br />
+                At Work
+              </h2>
+
+              <div className="mt-12 flex gap-6 overflow-x-auto pb-4 lg:mt-[calc(100vw*90/1728)] lg:gap-[calc(100vw*54/1728)]">
+                {communityCards.map((card) => (
+                  <article
+                    key={card.title}
+                    className="min-h-[420px] min-w-[300px] border border-white/50 px-7 py-8 md:min-h-[531px] md:min-w-[390px] md:px-9 md:py-10 lg:min-h-[calc(100vw*531/1728)] lg:min-w-[calc(100vw*461/1728)] lg:px-[calc(100vw*41/1728)] lg:py-[calc(100vw*42/1728)]"
+                  >
+                    <div className="h-8 w-8 text-white md:h-11 md:w-11 lg:h-[calc(100vw*51/1728)] lg:w-[calc(100vw*51/1728)]">
+                      <CommunityCardIcon type={card.icon} />
+                    </div>
+
+                    <h3 className="mt-8 whitespace-pre-line font-lato text-[30px] font-normal leading-[1.17] md:text-[36px] lg:mt-[calc(100vw*52/1728)] lg:text-[calc(100vw*44/1728)]">
+                      {card.title}
+                    </h3>
+
+                    <p className="mt-8 max-w-[334px] font-lato text-[22px] leading-[1.54] text-white/95 md:text-[24px] lg:mt-[calc(100vw*42/1728)] lg:max-w-[calc(100vw*334/1728)] lg:text-[calc(100vw*33/1728)]">
+                      {card.description}
+                    </p>
+
+                    <button className="group mt-8 flex items-center gap-4 font-lato text-[31px] font-bold leading-[1.17] md:text-[34px] lg:mt-[calc(100vw*48/1728)] lg:text-[calc(100vw*38/1728)]">
+                      Learn More
+                      <span className="h-[2px] w-10 bg-white transition group-hover:w-14 lg:w-[calc(100vw*43/1728)] lg:group-hover:w-[calc(100vw*54/1728)]" />
+                    </button>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
     </main>
   );
