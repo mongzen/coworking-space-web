@@ -191,26 +191,126 @@ function CommunityCardIcon({ type }: { type: "cube" | "badge" | "blocks" }) {
   );
 }
 
-const communityCards = [
+type CommunityCard = {
+  title: string;
+  description: string;
+  icon: "cube" | "badge" | "blocks";
+};
+
+const communityCards: CommunityCard[] = [
   {
     title: "100 + Renowned\nCompanies",
     description:
       "Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit, Sed Do Eiusmod Tempor Incididunt Ut Labore.",
-    icon: "cube" as const,
+    icon: "cube",
   },
   {
     title: "3 Building’s Available\nFor Co.",
     description:
       "Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit, Sed Do Eiusmod Tempor Incididunt Ut Labore.",
-    icon: "badge" as const,
+    icon: "badge",
   },
   {
     title: "10 + Communities\nConnected",
     description:
       "Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit, Sed Do Eiusmod Tempor Incididunt Ut Labore.",
-    icon: "blocks" as const,
+    icon: "blocks",
   },
 ];
+
+const DESIGN_WIDTH = 1728;
+const vw = (pixel: number) => `calc(100vw*${pixel}/${DESIGN_WIDTH})`;
+
+function SpinningInfoCircle() {
+  const labels = ["INFO", "MORE", "INFO", "MORE", "INFO", "MORE", "INFO", "MORE"];
+
+  return (
+    <div className="relative mx-auto flex h-[110px] w-[110px] items-center justify-center rounded-full border border-white/45 md:h-[130px] md:w-[130px] lg:h-[calc(100vw*138/1728)] lg:w-[calc(100vw*138/1728)]">
+      <motion.div
+        className="absolute inset-0"
+        animate={{ rotate: 360 }}
+        transition={{ duration: 10, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+      >
+        {labels.map((label, index) => {
+          const angle = index * 45;
+
+          return (
+            <span
+              key={`${label}-${index}`}
+              className="absolute left-1/2 top-1/2 origin-center text-[7px] font-lato font-normal tracking-[0.08em] text-white/55 md:text-[8px] lg:text-[calc(100vw*8/1728)]"
+              style={{
+                transform: `translate(-50%, -50%) rotate(${angle}deg) translateY(-${vw(61)}) rotate(-${angle}deg)`,
+              }}
+            >
+              {label}
+            </span>
+          );
+        })}
+      </motion.div>
+
+      <div className="flex h-[66px] w-[66px] items-center justify-center rounded-full bg-[#5b5b5b] md:h-[78px] md:w-[78px] lg:h-[calc(100vw*82/1728)] lg:w-[calc(100vw*82/1728)]">
+        <div className="h-7 w-7 rounded-full bg-[#ececec] md:h-8 md:w-8 lg:h-[calc(100vw*32/1728)] lg:w-[calc(100vw*32/1728)]" />
+      </div>
+    </div>
+  );
+}
+
+function CommunityCardSwiper({ cards }: { cards: CommunityCard[] }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const interval = window.setInterval(() => {
+      const maxScrollLeft = container.scrollWidth - container.clientWidth;
+      const cardWidth = container.querySelector("article")?.clientWidth ?? 0;
+      const step = cardWidth + 24;
+
+      if (container.scrollLeft + step >= maxScrollLeft - 5) {
+        container.scrollTo({ left: 0, behavior: "smooth" });
+        return;
+      }
+
+      container.scrollBy({ left: step, behavior: "smooth" });
+    }, 4200);
+
+    return () => window.clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="relative">
+      <div
+        ref={containerRef}
+        className="flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden lg:gap-[calc(100vw*54/1728)]"
+      >
+        {cards.map((card) => (
+          <article
+            key={card.title}
+            className="min-h-[420px] min-w-[300px] snap-start border border-white/50 px-7 py-8 md:min-h-[531px] md:min-w-[390px] md:px-9 md:py-10 lg:min-h-[calc(100vw*531/1728)] lg:min-w-[calc(100vw*461/1728)] lg:px-[calc(100vw*41/1728)] lg:py-[calc(100vw*42/1728)]"
+          >
+            <div className="h-8 w-8 text-white md:h-11 md:w-11 lg:h-[calc(100vw*51/1728)] lg:w-[calc(100vw*51/1728)]">
+              <CommunityCardIcon type={card.icon} />
+            </div>
+
+            <h3 className="mt-8 whitespace-pre-line font-lato text-[30px] font-normal leading-[1.17] md:text-[36px] lg:mt-[calc(100vw*52/1728)] lg:text-[calc(100vw*44/1728)]">
+              {card.title}
+            </h3>
+
+            <p className="mt-8 max-w-[334px] font-lato text-[22px] leading-[1.54] text-white/95 md:text-[24px] lg:mt-[calc(100vw*42/1728)] lg:max-w-[calc(100vw*334/1728)] lg:text-[calc(100vw*33/1728)]">
+              {card.description}
+            </p>
+
+            <button className="group mt-8 flex items-center gap-4 font-lato text-[31px] font-bold leading-[1.17] md:text-[34px] lg:mt-[calc(100vw*48/1728)] lg:text-[calc(100vw*38/1728)]">
+              Learn More
+              <span className="h-[2px] w-10 bg-white transition group-hover:w-14 lg:w-[calc(100vw*43/1728)] lg:group-hover:w-[calc(100vw*54/1728)]" />
+            </button>
+          </article>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export function HomepageClient(props: HomepageClientProps) {
   const [startCounter, setStartCounter] = useState(false);
@@ -344,14 +444,20 @@ export function HomepageClient(props: HomepageClientProps) {
       </section>
 
       <section className="relative overflow-hidden bg-black text-white">
-        <div className="mx-auto w-full border-x border-white/30 lg:max-w-[calc(100vw*1728/1728)]">
-          <div className="grid min-h-[calc(100vw*786/1728)] grid-cols-1 border-white/30 lg:grid-cols-[calc(100vw*318/1728)_1fr]">
+        <div className="mx-auto w-full border-x border-white/30">
+          <div
+            className="grid min-h-[760px] grid-cols-1 lg:grid-cols-[calc(100vw*318/1728)_1fr]"
+            style={{ minHeight: vw(786) }}
+          >
             <div className="relative hidden border-r border-white/30 lg:block">
-              <div className="mx-auto mt-[calc(100vw*154/1728)] flex h-[calc(100vw*110/1728)] w-[calc(100vw*110/1728)] items-center justify-center rounded-full border border-white/40">
-                <div className="h-[calc(100vw*44/1728)] w-[calc(100vw*44/1728)] rounded-full border border-white/30 bg-white/10" />
+              <div style={{ marginTop: vw(154) }}>
+                <SpinningInfoCircle />
               </div>
 
-              <div className="absolute -right-[calc(100vw*193/1728)] bottom-[calc(100vw*35/1728)] flex h-[calc(100vw*386/1728)] w-[calc(100vw*386/1728)] items-center justify-center rounded-full border-[1.5px] border-white/90 px-[calc(100vw*48/1728)] text-center font-lato text-[calc(100vw*32/1728)] font-bold leading-[1.54] text-white/90">
+              <div
+                className="absolute bottom-[2vw] -right-[11.2vw] flex items-center justify-center rounded-full border-[1.5px] border-white/90 px-[2.8vw] text-center font-lato font-bold leading-[1.54] text-white/90"
+                style={{ width: vw(386), height: vw(386), fontSize: vw(32) }}
+              >
                 Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit, Sed Do
                 Eiusmod Tempor Incididunt Ut Labore Et Dolore Magna Aliqua.
               </div>
@@ -364,30 +470,8 @@ export function HomepageClient(props: HomepageClientProps) {
                 At Work
               </h2>
 
-              <div className="mt-12 flex gap-6 overflow-x-auto pb-4 lg:mt-[calc(100vw*90/1728)] lg:gap-[calc(100vw*54/1728)]">
-                {communityCards.map((card) => (
-                  <article
-                    key={card.title}
-                    className="min-h-[420px] min-w-[300px] border border-white/50 px-7 py-8 md:min-h-[531px] md:min-w-[390px] md:px-9 md:py-10 lg:min-h-[calc(100vw*531/1728)] lg:min-w-[calc(100vw*461/1728)] lg:px-[calc(100vw*41/1728)] lg:py-[calc(100vw*42/1728)]"
-                  >
-                    <div className="h-8 w-8 text-white md:h-11 md:w-11 lg:h-[calc(100vw*51/1728)] lg:w-[calc(100vw*51/1728)]">
-                      <CommunityCardIcon type={card.icon} />
-                    </div>
-
-                    <h3 className="mt-8 whitespace-pre-line font-lato text-[30px] font-normal leading-[1.17] md:text-[36px] lg:mt-[calc(100vw*52/1728)] lg:text-[calc(100vw*44/1728)]">
-                      {card.title}
-                    </h3>
-
-                    <p className="mt-8 max-w-[334px] font-lato text-[22px] leading-[1.54] text-white/95 md:text-[24px] lg:mt-[calc(100vw*42/1728)] lg:max-w-[calc(100vw*334/1728)] lg:text-[calc(100vw*33/1728)]">
-                      {card.description}
-                    </p>
-
-                    <button className="group mt-8 flex items-center gap-4 font-lato text-[31px] font-bold leading-[1.17] md:text-[34px] lg:mt-[calc(100vw*48/1728)] lg:text-[calc(100vw*38/1728)]">
-                      Learn More
-                      <span className="h-[2px] w-10 bg-white transition group-hover:w-14 lg:w-[calc(100vw*43/1728)] lg:group-hover:w-[calc(100vw*54/1728)]" />
-                    </button>
-                  </article>
-                ))}
+              <div className="mt-12 lg:mt-[calc(100vw*90/1728)]">
+                <CommunityCardSwiper cards={communityCards} />
               </div>
             </div>
           </div>
