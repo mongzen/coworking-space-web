@@ -235,7 +235,7 @@ export function HomepageClient(props: HomepageClientProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="mt-6 max-w-lg font-lato text-[34px] font-normal leading-[1.17] text-black/75 md:mt-8 md:text-[50px] lg:text-[56px]"
+            className="mt-6 max-w-lg font-lato text-[24px] font-normal leading-[1.17] text-black/75 md:mt-8"
           >
             {props.heroDescription}
           </motion.p>
