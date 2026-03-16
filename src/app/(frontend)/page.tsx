@@ -23,6 +23,7 @@ const fallbackData = {
 }
 
 export default async function HomePage() {
+
   try {
     const payload = await getPayload({ config })
     const homepage = await payload.findGlobal({ slug: 'homepage' })
