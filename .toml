@@ -1,0 +1,12 @@
+# Cloudflare Pages/Workers configuration for Next.js
+
+[build]
+command = "pnpm build"
+publish = ".next"
+
+[env]
+NODE_VERSION = "18"
+
+# Uncomment if using custom server or edge runtime
+# [experimental]
+# nextjs_compat = true
