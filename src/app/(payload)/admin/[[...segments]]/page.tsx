@@ -8,12 +8,14 @@ type Args = {
 }
 
 
+
 export const generateMetadata = async ({ params, searchParams }: Args) => {
-  // Ensure segments is always string[]
+  // Ensure segments is always string[] for RootPage, but for generatePageMetadata, params must be Promise<{ [key: string]: string | string[] }>
   const resolvedParams = await params;
+  const safeParams = { ...resolvedParams, segments: resolvedParams.segments ?? [] };
   return generatePageMetadata({
     config,
-    params: { segments: resolvedParams.segments ?? [] },
+    params: Promise.resolve(safeParams),
     searchParams
   });
 }
