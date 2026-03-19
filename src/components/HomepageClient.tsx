@@ -282,26 +282,26 @@ function CommunityCardSwiper({ cards }: { cards: CommunityCard[] }) {
     <div className="relative">
       <div
         ref={containerRef}
-        className="flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden lg:gap-[calc(100vw*54/1728)]"
+        className="flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden lg:gap-[calc(100vw*44/1728)]"
       >
         {cards.map((card) => (
           <article
             key={card.title}
-            className="min-h-[420px] min-w-[300px] snap-start border border-white/50 px-7 py-8 md:min-h-[531px] md:min-w-[390px] md:px-9 md:py-10 lg:min-h-[calc(100vw*531/1728)] lg:min-w-[calc(100vw*461/1728)] lg:px-[calc(100vw*41/1728)] lg:py-[calc(100vw*42/1728)]"
+            className="min-h-[420px] min-w-[300px] snap-start border border-white/50 px-7 py-8 md:min-h-[531px] md:min-w-[390px] md:px-9 md:py-10 lg:min-h-[calc(100vw*531/1728)] lg:min-w-[calc(100vw*420/1728)] lg:px-[calc(100vw*41/1728)] lg:py-[calc(100vw*42/1728)]"
           >
             <div className="h-8 w-8 text-white md:h-11 md:w-11 lg:h-[calc(100vw*51/1728)] lg:w-[calc(100vw*51/1728)]">
               <CommunityCardIcon type={card.icon} />
             </div>
 
-            <h3 className="mt-8 whitespace-pre-line font-lato text-[30px] font-normal leading-[1.17] md:text-[36px] lg:mt-[calc(100vw*52/1728)] lg:text-[calc(100vw*44/1728)]">
+            <h3 className="mt-8 whitespace-pre-line font-lato text-[30px] font-normal leading-[1.17] md:text-[28px] lg:mt-[calc(100vw*52/1728)] lg:text-[calc(100vw*32/1728)]">
               {card.title}
             </h3>
 
-            <p className="mt-8 max-w-[334px] font-lato text-[22px] leading-[1.54] text-white/95 md:text-[24px] lg:mt-[calc(100vw*42/1728)] lg:max-w-[calc(100vw*334/1728)] lg:text-[calc(100vw*33/1728)]">
+            <p className="mt-8 max-w-[300px] font-lato text-[22px] leading-[1.54] text-white/95 md:text-[24px] lg:mt-[calc(100vw*42/1728)] lg:max-w-[calc(100vw*300/1728)] lg:text-[calc(100vw*22/1728)]">
               {card.description}
             </p>
 
-            <button className="group mt-8 flex items-center gap-4 font-lato text-[31px] font-bold leading-[1.17] md:text-[34px] lg:mt-[calc(100vw*48/1728)] lg:text-[calc(100vw*38/1728)]">
+            <button className="group mt-8 flex items-center gap-4 font-lato text-[24px] font-bold leading-[1.17] lg:mt-[calc(100vw*48/1728)] lg:text-[calc(100vw*24/1728)]">
               Learn More
               <span className="h-[2px] w-10 bg-white transition group-hover:w-14 lg:w-[calc(100vw*43/1728)] lg:group-hover:w-[calc(100vw*54/1728)]" />
             </button>
@@ -325,7 +325,7 @@ export function HomepageClient(props: HomepageClientProps) {
 
   return (
     <main className="min-h-screen bg-[#f7f7f7] text-black">
-      <section className="mx-auto grid min-h-screen w-full max-w-[1600px] grid-cols-1 border-x border-black/10 lg:grid-cols-12">
+      <section className="mx-auto grid min-h-screen w-full grid-cols-1 border-x border-black/10 lg:grid-cols-12">
         <header className="flex items-center justify-between gap-4 border-b border-black/10 px-6 py-5 lg:col-span-12 lg:px-12 lg:py-6">
           <motion.div
             initial={{ opacity: 0, y: -12 }}
@@ -455,15 +455,15 @@ export function HomepageClient(props: HomepageClientProps) {
               </div>
 
               <div
-                className="absolute bottom-[2vw] -right-[11.2vw] flex items-center justify-center rounded-full border-[1.5px] border-white/90 px-[2.8vw] text-center font-lato font-bold leading-[1.54] text-white/90"
-                style={{ width: vw(386), height: vw(386), fontSize: vw(32) }}
+                className="absolute bottom-[15vw] -right-[6.2vw] flex items-center justify-center rounded-full border-[1.5px] border-white/90 px-[2.8vw] text-center font-lato font-bold leading-[1.54] text-white/90 bg-black"
+                style={{ width: vw(346), height: vw(346), fontSize: vw(18) }}
               >
                 Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit, Sed Do
                 Eiusmod Tempor Incididunt Ut Labore Et Dolore Magna Aliqua.
               </div>
             </div>
 
-            <div className="px-6 py-16 md:px-10 lg:px-[calc(100vw*110/1728)] lg:py-[calc(100vw*96/1728)]">
+            <div className="px-6 py-16 md:px-10 lg:px-[calc(100vw*200/1728)] lg:py-[calc(100vw*96/1728)]">
               <h2 className="text-center font-italiana text-[52px] leading-[1.17] md:text-[84px] lg:text-[calc(100vw*120/1728)]">
                 A Community
                 <br />
