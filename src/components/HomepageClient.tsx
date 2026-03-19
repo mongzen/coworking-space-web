@@ -1,8 +1,20 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
+import {
+  ArrowRight,
+  BriefcaseBusiness,
+  Coffee,
+  Mail,
+  MapPin,
+  Phone,
+  ShieldCheck,
+  Sparkles,
+  Users,
+  Wifi,
+} from "lucide-react";
 import Image from "next/image";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { type ReactNode, useEffect, useMemo, useRef, useState } from "react";
 
 type Stat = { label: string; value: string };
 type FeatureImage = { imageURL: string };
@@ -218,8 +230,148 @@ const communityCards: CommunityCard[] = [
   },
 ];
 
+const needsCards = [
+  {
+    title: "Private Meeting Room",
+    description: "Quiet rooms designed for pitches, calls, and focused team sessions.",
+    imageURL:
+      "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1200&q=80",
+  },
+  {
+    title: "Cafe Corner",
+    description: "A relaxed zone for short breaks, casual chats, and coffee between tasks.",
+    imageURL:
+      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1200&q=80",
+  },
+  {
+    title: "Open Lounge Setup",
+    description: "Flexible seating that adapts to workshops, visitors, and creative reviews.",
+    imageURL:
+      "https://images.unsplash.com/photo-1497366412874-3415097a27e7?auto=format&fit=crop&w=1200&q=80",
+  },
+  {
+    title: "Team Work Suite",
+    description: "Roomier layouts for growing teams that need comfort and structure every day.",
+    imageURL:
+      "https://images.unsplash.com/photo-1497215842964-222b430dc094?auto=format&fit=crop&w=1200&q=80",
+  },
+];
+
+const officeLeaseBenefits = [
+  {
+    title: "High-speed internet",
+    description: "Fast and stable Wi-Fi throughout the building for daily work and video calls.",
+    icon: Wifi,
+  },
+  {
+    title: "Private storage",
+    description: "Keep documents, devices, and supplies secure with dedicated lockable storage.",
+    icon: ShieldCheck,
+  },
+  {
+    title: "Meeting rooms",
+    description: "Reserve polished spaces for presentations, interviews, and internal sessions.",
+    icon: BriefcaseBusiness,
+  },
+  {
+    title: "Community events",
+    description: "Join networking meetups, workshops, and curated activities with other members.",
+    icon: Users,
+  },
+  {
+    title: "Daily refreshments",
+    description: "Coffee, tea, and pantry essentials are available to keep the day moving.",
+    icon: Coffee,
+  },
+  {
+    title: "Business support",
+    description: "Reception assistance and a premium front-of-house experience for your clients.",
+    icon: Sparkles,
+  },
+];
+
+const workspaceGallery = [
+  {
+    title: "Meeting Space",
+    imageURL:
+      "https://images.unsplash.com/photo-1517502884422-41eaead166d4?auto=format&fit=crop&w=1200&q=80",
+  },
+  {
+    title: "Main Office",
+    imageURL:
+      "https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=1200&q=80",
+  },
+  {
+    title: "Consultant Space",
+    imageURL:
+      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80",
+  },
+  {
+    title: "Work Space",
+    imageURL:
+      "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80",
+  },
+];
+
+const membershipPlans = [
+  {
+    name: "Remote Worker",
+    price: "Rs. 22,000/-",
+    features: [
+      "Access to shared lounges and hot desks during working hours",
+      "Business address and mail handling for daily operations",
+      "Flexible booking credits for meeting rooms each month",
+    ],
+  },
+  {
+    name: "Outlying Worker",
+    price: "Rs. 45,000/-",
+    features: [
+      "Dedicated desk with extended access for consistent routines",
+      "Storage, printing, and faster room-booking priority included",
+      "Designed for hybrid teams or founders commuting into the city",
+    ],
+  },
+  {
+    name: "Resident",
+    price: "Rs. 78,000/-",
+    features: [
+      "Private member benefits with all-day workspace access",
+      "Priority reservations, guest passes, and concierge-style support",
+      "A premium setup for teams that want a stable long-term base",
+    ],
+  },
+];
+
 const DESIGN_WIDTH = 1728;
 const vw = (pixel: number) => `calc(100vw*${pixel}/${DESIGN_WIDTH})`;
+
+function FadeIn({
+  children,
+  className,
+  delay = 0,
+  y = 28,
+}: {
+  children: ReactNode;
+  className?: string;
+  delay?: number;
+  y?: number;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-90px 0px" });
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.75, delay, ease: [0.22, 1, 0.36, 1] }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
 
 function SpinningInfoCircle() {
   const labels = ["INFO", "MORE", "INFO", "MORE", "INFO", "MORE", "INFO", "MORE"];
@@ -477,6 +629,299 @@ export function HomepageClient(props: HomepageClientProps) {
           </div>
         </div>
       </section>
+
+      <section className="border-t border-black/10 bg-[#f7f7f7]" id="spaces">
+        <div className="mx-auto w-full border-x border-black/10 px-6 py-14 md:px-10 lg:max-w-[1728px] lg:px-[clamp(34px,4vw,78px)] lg:py-[clamp(72px,7vw,110px)]">
+          <div className="grid items-start gap-6 md:gap-8 xl:grid-cols-[minmax(250px,0.82fr)_minmax(280px,1fr)_minmax(280px,1fr)] xl:gap-[clamp(18px,1.8vw,34px)]">
+            <FadeIn className="max-w-[360px] pt-2 xl:pt-6">
+              <h2 className="font-italiana text-[clamp(3.2rem,7vw,5.9rem)] leading-[0.92] tracking-[-0.04em]">
+                A Space
+                <br />
+                To Make
+                <br />
+                Your Own
+              </h2>
+              <p className="mt-5 max-w-[24rem] font-lato text-[clamp(0.92rem,1.4vw,1.08rem)] leading-[1.85] text-black/70 lg:mt-8">
+                Crafted for teams that want a polished office atmosphere without losing warmth, flexibility, or personality.
+              </p>
+              <motion.a
+                href="#tour"
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                className="mt-6 inline-flex items-center justify-center bg-black px-7 py-3 font-lato text-sm font-bold tracking-[0.04em] text-white transition hover:bg-black/85 lg:mt-8"
+              >
+                Explore
+              </motion.a>
+            </FadeIn>
+
+            <FadeIn delay={0.08} className="relative aspect-[0.77] min-h-[320px] overflow-hidden bg-black/5 sm:min-h-[420px] xl:min-h-[clamp(420px,35vw,610px)]">
+              <Image
+                src={
+                  images[0]?.imageURL ||
+                  "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80"
+                }
+                alt="Open-plan office interior"
+                fill
+                className="object-cover transition duration-700 hover:scale-[1.03]"
+              />
+            </FadeIn>
+
+            <FadeIn delay={0.16} className="relative aspect-[0.77] min-h-[320px] overflow-hidden bg-black/5 sm:min-h-[420px] xl:min-h-[clamp(420px,35vw,610px)]">
+              <Image
+                src={
+                  images[1]?.imageURL ||
+                  "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1200&q=80"
+                }
+                alt="Coworking lounge"
+                fill
+                className="object-cover transition duration-700 hover:scale-[1.03]"
+              />
+            </FadeIn>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-black/10 bg-[#f7f7f7]" id="feature">
+        <div className="mx-auto w-full border-x border-black/10 px-6 py-16 md:px-10 lg:max-w-[1728px] lg:px-[clamp(42px,5vw,96px)] lg:py-[clamp(88px,8vw,138px)]">
+          <FadeIn className="mx-auto max-w-[600px] text-center">
+            <h2 className="font-italiana text-[clamp(3.1rem,6.7vw,5.6rem)] leading-[0.94] tracking-[-0.04em]">
+              Space To Suit
+              <br />
+              Your Needs
+            </h2>
+          </FadeIn>
+
+          <div className="relative mt-14 grid gap-8 md:grid-cols-2 xl:mt-20 xl:grid-cols-4 xl:gap-[clamp(24px,2.4vw,44px)]">
+            <motion.a
+              href="#membership"
+              whileHover={{ x: 6 }}
+              className="hidden items-center gap-3 font-lato text-sm font-bold uppercase tracking-[0.18em] text-black/70 xl:absolute xl:left-1/2 xl:top-[36%] xl:flex xl:-translate-x-1/2"
+            >
+              Explore More
+              <ArrowRight className="h-4 w-4" />
+            </motion.a>
+
+            {needsCards.map((card, index) => (
+              <FadeIn
+                key={card.title}
+                delay={index * 0.08}
+                className={index % 2 === 1 ? "xl:translate-y-16" : ""}
+              >
+                <article className="group">
+                  <div className="relative aspect-[1.02] overflow-hidden bg-black/5">
+                    <Image
+                      src={card.imageURL}
+                      alt={card.title}
+                      fill
+                      className="object-cover transition duration-700 group-hover:scale-[1.04]"
+                    />
+                  </div>
+                  <div className="mt-5 max-w-[17rem]">
+                    <h3 className="font-italiana text-[clamp(1.5rem,2.1vw,2.2rem)] leading-[1] tracking-[-0.03em]">
+                      {card.title}
+                    </h3>
+                    <p className="mt-3 font-lato text-[0.98rem] leading-[1.75] text-black/70">
+                      {card.description}
+                    </p>
+                  </div>
+                </article>
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-black/10 bg-[#f7f7f7]" id="amenities">
+        <div className="mx-auto grid w-full gap-12 border-x border-black/10 px-6 py-16 md:px-10 lg:max-w-[1728px] lg:grid-cols-[minmax(260px,0.92fr)_1fr] lg:px-[clamp(42px,5vw,96px)] lg:py-[clamp(88px,8vw,132px)]">
+          <FadeIn className="max-w-[320px]">
+            <h2 className="font-italiana text-[clamp(3rem,5.8vw,5rem)] leading-[0.96] tracking-[-0.04em]">
+              Included In Your Office Lease
+            </h2>
+          </FadeIn>
+
+          <div className="grid gap-x-10 gap-y-8 md:grid-cols-2 md:gap-y-10 lg:gap-x-16">
+            {officeLeaseBenefits.map((benefit, index) => {
+              const Icon = benefit.icon;
+
+              return (
+                <FadeIn key={benefit.title} delay={index * 0.05}>
+                  <article className="flex gap-4 border-t border-black/10 pt-6">
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-black text-white">
+                      <Icon className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <h3 className="font-lato text-[1.05rem] font-bold tracking-[0.01em]">
+                        {benefit.title}
+                      </h3>
+                      <p className="mt-2 max-w-[24rem] font-lato text-[0.95rem] leading-[1.75] text-black/68">
+                        {benefit.description}
+                      </p>
+                    </div>
+                  </article>
+                </FadeIn>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-black/10 bg-black text-white" id="tour">
+        <div className="mx-auto w-full border-x border-white/20 px-6 py-16 text-center md:px-10 lg:max-w-[1728px] lg:px-12 lg:py-[clamp(90px,9vw,136px)]">
+          <FadeIn className="mx-auto max-w-[620px]">
+            <h2 className="font-italiana text-[clamp(3rem,5.6vw,5.2rem)] leading-[0.94] tracking-[-0.04em]">
+              {props.ctaTitle}
+            </h2>
+            <p className="mx-auto mt-5 max-w-[34rem] font-lato text-[0.98rem] leading-[1.85] text-white/72 lg:text-[1.05rem]">
+              {props.ctaDescription}
+            </p>
+            <motion.a
+              href="#contact"
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              className="mt-8 inline-flex items-center justify-center border border-white/40 px-8 py-3 font-lato text-sm font-bold tracking-[0.15em] text-white transition hover:bg-white hover:text-black"
+            >
+              {props.ctaButtonLabel}
+            </motion.a>
+          </FadeIn>
+        </div>
+      </section>
+
+      <section className="border-t border-black/10 bg-[#f7f7f7]">
+        <div className="mx-auto w-full border-x border-black/10 px-6 py-16 md:px-10 lg:max-w-[1728px] lg:px-[clamp(42px,5vw,96px)] lg:py-[clamp(88px,8vw,132px)]">
+          <FadeIn className="mx-auto max-w-[560px] text-center">
+            <h2 className="font-italiana text-[clamp(3rem,5.8vw,5.1rem)] leading-[0.96] tracking-[-0.04em]">
+              See Your
+              <br />
+              Working Space
+            </h2>
+          </FadeIn>
+
+          <div className="mt-14 grid gap-8 md:grid-cols-2 xl:mt-20 xl:grid-cols-4 xl:gap-[clamp(28px,2.5vw,52px)]">
+            {workspaceGallery.map((space, index) => (
+              <FadeIn
+                key={space.title}
+                delay={index * 0.07}
+                className={index % 2 === 1 ? "xl:translate-y-16" : ""}
+              >
+                <article className="group flex items-center gap-4 xl:flex-col xl:items-start">
+                  <div className="relative h-[92px] w-[92px] shrink-0 overflow-hidden bg-black/5 sm:h-[118px] sm:w-[118px] lg:h-[132px] lg:w-[132px]">
+                    <Image
+                      src={space.imageURL}
+                      alt={space.title}
+                      fill
+                      className="object-cover transition duration-700 group-hover:scale-[1.05]"
+                    />
+                  </div>
+                  <h3 className="font-lato text-[1rem] font-medium tracking-[0.01em] text-black/80 xl:mt-4">
+                    {space.title}
+                  </h3>
+                </article>
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-black/10 bg-black text-white" id="membership">
+        <div className="mx-auto w-full border-x border-white/20 px-6 py-16 md:px-10 lg:max-w-[1728px] lg:px-[clamp(42px,5vw,96px)] lg:py-[clamp(88px,8vw,132px)]">
+          <FadeIn className="max-w-[540px]">
+            <h2 className="font-italiana text-[clamp(3rem,5.7vw,5rem)] leading-[0.96] tracking-[-0.04em]">
+              Our Memberships
+            </h2>
+          </FadeIn>
+
+          <div className="mt-10 space-y-6 lg:mt-14">
+            {membershipPlans.map((plan, index) => (
+              <FadeIn key={plan.name} delay={index * 0.08}>
+                <article className="grid gap-6 border-t border-white/15 py-8 lg:grid-cols-[220px_1fr_190px] lg:items-start lg:gap-10 lg:py-10">
+                  <h3 className="font-lato text-[2rem] leading-[1.05] lg:text-[2.3rem]">
+                    {plan.name}
+                  </h3>
+
+                  <ul className="space-y-3 font-lato text-[0.96rem] leading-[1.75] text-white/74">
+                    {plan.features.map((feature) => (
+                      <li key={feature} className="flex gap-3">
+                        <span className="mt-[0.6rem] h-[5px] w-[5px] shrink-0 rounded-full bg-white/75" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="text-left font-lato text-[2rem] font-light leading-[1.02] tracking-[-0.03em] lg:text-right lg:text-[3rem]">
+                    {plan.price}
+                  </div>
+                </article>
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <footer className="border-t border-black/10 bg-[#f7f7f7]" id="contact">
+        <div className="mx-auto grid w-full gap-0 border-x border-black/10 md:grid-cols-4 lg:max-w-[1728px]">
+          <div className="flex min-h-[180px] items-center justify-center border-b border-black/10 p-8 md:border-b-0 md:border-r">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.94 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, margin: "-60px 0px" }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <div className="flex h-[118px] w-[118px] items-center justify-center rounded-full border border-dashed border-black/20">
+                <LogoMark />
+              </div>
+            </motion.div>
+          </div>
+
+          <FadeIn className="min-h-[180px] border-b border-black/10 p-8 md:border-b-0 md:border-r">
+            <h3 className="font-italiana text-[2rem] leading-none">Interested?</h3>
+            <div className="mt-5 space-y-3 font-lato text-[0.98rem] leading-[1.7] text-black/72">
+              <p className="flex items-center gap-3">
+                <Mail className="h-4 w-4" />
+                hello@office-space.com
+              </p>
+              <p className="flex items-center gap-3">
+                <Phone className="h-4 w-4" />
+                +94 77 123 4567
+              </p>
+              <a href="#tour" className="inline-flex items-center gap-2 pt-2 font-bold text-black">
+                Contact Us
+                <ArrowRight className="h-4 w-4" />
+              </a>
+            </div>
+          </FadeIn>
+
+          <FadeIn className="min-h-[180px] border-b border-black/10 p-8 md:border-b-0 md:border-r">
+            <h3 className="font-italiana text-[2rem] leading-none">Find Us</h3>
+            <div className="mt-5 space-y-3 font-lato text-[0.98rem] leading-[1.7] text-black/72">
+              <p className="flex items-start gap-3">
+                <MapPin className="mt-1 h-4 w-4 shrink-0" />
+                24 Corporate Avenue, Colombo 03, Sri Lanka
+              </p>
+              <p>Monday to Saturday, 8:00 AM to 8:00 PM</p>
+              <a href="#about" className="inline-flex items-center gap-2 pt-2 font-bold text-black">
+                Explore
+                <ArrowRight className="h-4 w-4" />
+              </a>
+            </div>
+          </FadeIn>
+
+          <FadeIn className="min-h-[180px] p-8">
+            <h3 className="font-italiana text-[2rem] leading-none">Interested?</h3>
+            <div className="mt-5 space-y-3 font-lato text-[0.98rem] leading-[1.7] text-black/72">
+              <p>Membership options for freelancers, teams, and growing companies.</p>
+              <p>Schedule a visit and find the setup that fits your routine.</p>
+              <a href="#membership" className="inline-flex items-center gap-2 pt-2 font-bold text-black">
+                See Plans
+                <ArrowRight className="h-4 w-4" />
+              </a>
+            </div>
+          </FadeIn>
+        </div>
+
+        <div className="border-t border-black/10 px-6 py-4 text-center font-lato text-[0.82rem] uppercase tracking-[0.14em] text-black/55">
+          Premium Coworking Experience
+        </div>
+      </footer>
     </main>
   );
 }
